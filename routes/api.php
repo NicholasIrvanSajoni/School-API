@@ -30,8 +30,16 @@ Route::get('user', [UserController::class, 'index']);
 Route::get('guru', [GuruController::class, 'index']);
 
 Route::get('kelas', [KelasController::class, 'index']);
+route::post('kelas/add', [KelasController::class, 'store']);
+Route::get('kelas/{id}', [KelasController::class, 'show']);
+Route::post('kelas/update/{id}', [KelasController::class, 'update']);
+Route::delete('kelas/delete/{id}', [KelasController::class, 'destroy']);
 
 Route::get('matapelajaran', [MataPelajaranController::class, 'index']);
+Route::post('matapelajaran/add', [MataPelajaranController::class, 'store']);
+Route::get('matapelajaran/{id}', [MataPelajaranController::class, 'show']);
+Route::post('matapelajaran/update/{id}', [MataPelajaranController::class, 'update']);
+Route::delete('matapelajaran/delete/{id}', [MataPelajaranController::class, 'destroy']);
 
 Route::get('notification', [NotificationController::class, 'index']);
 
