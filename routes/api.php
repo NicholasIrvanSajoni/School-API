@@ -26,14 +26,19 @@ Route::get('murid', [MuridController::class, 'index']);
 Route::get('murid/{id}', [MuridController::class, 'show']);
 
 Route::get('user', [UserController::class, 'index']);
+Route::get('user/{id}',[UserController::class, 'show']);
+Route::post('user/add',[UserController::class, 'store']);
+Route::post('user/update/{id}',[UserController::class, 'update']);
+Route::post('user/delete/{id}',[UserController::class, 'destroy']);
 
 Route::get('guru', [GuruController::class, 'index']);
+Route::get('guru/{id}', [GuruController::class, 'show']);
 
 Route::get('kelas', [KelasController::class, 'index']);
 route::post('kelas/add', [KelasController::class, 'store']);
 Route::get('kelas/{id}', [KelasController::class, 'show']);
 Route::post('kelas/update/{id}', [KelasController::class, 'update']);
-Route::delete('kelas/delete/{id}', [KelasController::class, 'destroy']);
+Route::post('kelas/delete/{id}', [KelasController::class, 'destroy']);
 
 Route::get('matapelajaran', [MataPelajaranController::class, 'index']);
 Route::post('matapelajaran/add', [MataPelajaranController::class, 'store']);
@@ -44,5 +49,7 @@ Route::delete('matapelajaran/delete/{id}', [MataPelajaranController::class, 'des
 Route::get('notification', [NotificationController::class, 'index']);
 
 Route::get('role', [RoleController::class, 'index']);
+Route::get('role/{id}', [RoleController::class, 'show']);
+Route::post('role/add', [RoleController::class, 'store']);
 
 Route::get('alokasikelas', [AlokasiKelasController::class, 'index']);
