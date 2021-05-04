@@ -59,3 +59,7 @@ Route::post('role/update/{id}',[RoleController::class, 'update']);
 Route::delete('role/delete/{id}',[RoleController::class, 'destroy']);
 
 Route::get('alokasikelas', [AlokasiKelasController::class, 'index']);
+Route::post('alokasikelas/add',[AlokasiKelasController::class, 'store']);
+Route::get('alokasikelas/{id}',[AlokasiKelasController::class, 'show']);
+Route::post('alokasikelas/update/{id}',[AlokasiKelasController::class, 'update']);
+Route::delete('alokasikelas/delete/{id}',[AlokasiKelasController::class, 'destroy']);
