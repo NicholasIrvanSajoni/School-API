@@ -30,40 +30,40 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),
-        [
-            'name' => 'required',
-            'description' => 'required'
-        ]);
-
-        if($validator->fails())
-        {
-            return
+        $validator = Validator::make(
+            $request->all(),
             [
-                'message' => 'Validation failed',
-                'error' => $validator->errors(),
-                'code' => 500
-            ];
+                'name' => 'required',
+                'description' => 'required'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return
+                [
+                    'message' => 'Validation failed',
+                    'error' => $validator->errors(),
+                    'code' => 500
+                ];
         }
         $generatedId = $this->generateIdRole();
-        $response = DB::insert('insert into role (id_role, name, description) values (?, ?, ?)', 
-        [$generatedId, $request->name, $request->description]);
+        $response = DB::insert(
+            'insert into role (id_role, name, description) values (?, ?, ?)',
+            [$generatedId, $request->name, $request->description]
+        );
 
-        if($response == 1)
-        {
+        if ($response == 1) {
             return
-            [
-                'messages' => 'Add Role Success',
-                'code' => 200
-            ];
-        }
-        else
-        {
+                [
+                    'messages' => 'Add Role Success',
+                    'code' => 200
+                ];
+        } else {
             return
-            [
-                'messages' => 'Add Role Failed',
-                'code' => 500
-            ];
+                [
+                    'messages' => 'Add Role Failed',
+                    'code' => 500
+                ];
         }
     }
 
@@ -76,17 +76,14 @@ class RoleController extends Controller
     public function show($id)
     {
         $roletarget = Role::where('id_role', $id)->first();
-        if(is_object($roletarget))
-        {
+        if (is_object($roletarget)) {
             return $roletarget;
-        }
-        else
-        {
-            return 
-            [
-                'message' => 'Role Not Found',
-                'code' => 500
-            ];
+        } else {
+            return
+                [
+                    'message' => 'Role Not Found',
+                    'code' => 500
+                ];
         }
     }
 
@@ -99,7 +96,40 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'description' => 'required'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return
+                [
+                    'message' => 'Validation Failed',
+                    'error' => $validator->errors(),
+                    'code' => 500
+                ];
+        }
+        $getroledata = $this->show($id);
+        $responseUpdateRole = DB::update(
+            'update role set name=?, description=? where id_role = ?',
+            [$request->name, $request->description, $getroledata['id_role']]
+        );
+        if ($responseUpdateRole == 1) {
+            return
+                [
+                    'message' => 'Update Role Success',
+                    'code' => 200
+                ];
+        } else {
+            return
+                [
+                    'message' => 'Update Role Failed',
+                    'code' => 500
+                ];
+        }
     }
 
     /**
@@ -110,7 +140,21 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $getroledata = $this->show($id);
+        $responseDeleteRole = Role::where('id_role', $id)->delete();
+        if ($responseDeleteRole == 1) {
+            return
+                [
+                    'message' => 'Delete Role Success',
+                    'role' => 200
+                ];
+        } else {
+            return
+                [
+                    'message' => 'Delete Role Failed',
+                    'role' => 500
+                ];
+        }
     }
 
     private function generateIdRole()

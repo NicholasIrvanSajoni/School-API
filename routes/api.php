@@ -47,9 +47,15 @@ Route::post('matapelajaran/update/{id}', [MataPelajaranController::class, 'updat
 Route::delete('matapelajaran/delete/{id}', [MataPelajaranController::class, 'destroy']);
 
 Route::get('notification', [NotificationController::class, 'index']);
+Route::post('notification/add',[NotificationController::class, 'store']);
+Route::get('notification/{id}', [NotificationController::class, 'show']);
+Route::post('notification/update/{id}',[NotificationController::class, 'update']);
+Route::delete('notification/delete/{id}',[NotificationController::class, 'destroy']);
 
 Route::get('role', [RoleController::class, 'index']);
 Route::get('role/{id}', [RoleController::class, 'show']);
 Route::post('role/add', [RoleController::class, 'store']);
+Route::post('role/update/{id}',[RoleController::class, 'update']);
+Route::delete('role/delete/{id}',[RoleController::class, 'destroy']);
 
 Route::get('alokasikelas', [AlokasiKelasController::class, 'index']);
